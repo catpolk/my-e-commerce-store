@@ -45,12 +45,14 @@ router.put('/:id', (req, res) => {
       category_name:req.body.category_name,
     },
     // Gets the category based on the id given in the request parameters
-    {
-      where: {
-        id: req.params.id,
-      },
-    }
-  ).then((updatedCategory) => {
+    { where: { id: req.params.id, } }
+  )
+  .then(() => {
+    return Category.findByPk(req.params.id, {
+      include: [Product]
+    });
+  })
+  .then((updatedCategory) => {
     // Sends the updated book as a json response
     res.json(updatedCategory);
   })

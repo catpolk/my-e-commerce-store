@@ -44,13 +44,14 @@ router.post('/', (req, res) => {
 
   // update a tag's name by its `id` value
 router.put('/:id', (req, res) => {
-  Tag.update (req.body, {
-    where: {
-      id: req.params.id,
-    },
-  }
-  ).then((updatedTag) => {
-    res.json(updatedTag);
+  Tag.update(req.body, { where: { id: req.params.id } })
+  .then(() => {
+    return Tag.findByPk(req.params.id, {
+      include: [{ model: Product, through: ProductTag }]
+    });
+  })
+  .then((updatedTag) => { 
+    res.json(updatedTag) 
   })
   .catch((err) => {
     res.json(err);
