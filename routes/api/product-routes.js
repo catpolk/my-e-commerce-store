@@ -125,7 +125,7 @@ router.delete('/:id', (req, res) => {
     },
   })
   .then(() => {
-    res.json({ message: "Product successfully deleted" });
+    res.json({ message: "Product is successfully deleted" });
   })
   .catch((err) => res.json(err));
 });

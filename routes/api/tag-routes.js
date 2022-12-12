@@ -65,8 +65,8 @@ router.delete('/:id', (req, res) => {
       id:req.params.id,
     },
   })
-  .then((deletedTag) => {
-    res.json(deletedTag);
+  .then(() => {
+    res.json({  message: "Tag is successfully deleted"});
   })
   .catch((err) => {
     res.json(err);
